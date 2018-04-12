@@ -4,7 +4,7 @@
     {
       "sourceType": "gls.configuration.MySqlConfiguration",
       "name": "spring.datasource.gls",
-      "sourceMethod": "public javax.sql.DataSource glsDataSource() ",
+      "sourceMethod": "glsDataSource()",
       "type": "javax.sql.DataSource"
     }
   ],

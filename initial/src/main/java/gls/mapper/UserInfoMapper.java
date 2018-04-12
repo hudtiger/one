@@ -19,8 +19,8 @@ public interface UserInfoMapper {
 
 	@Select("select id,name,content from user where Id= #{id}")
 	@Results({
-		@Result(property="username",column="companyId"),
-		@Result(property="password",column="content")
+		@Result(property="name",column="name"),
+		@Result(property="content",column="content")
 	})
 	User getUserById(Integer id);
 
@@ -33,6 +33,6 @@ public interface UserInfoMapper {
 	@Update("UPDATE user SET name = #{user.name} , content = #{user.content} WHERE id = #{id}")
 	public int update(@Param("id") Integer id, @Param("user") User user);
 
-	@Delete("DELETE from tblMaster where id = #{id} ")
+	@Delete("DELETE from user where id = #{id} ")
 	public int delete(Integer id);
 }
