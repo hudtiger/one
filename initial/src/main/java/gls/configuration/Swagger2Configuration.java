@@ -20,7 +20,7 @@ public class Swagger2Configuration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(requestHandler->RequestHandlerSelectors.basePackage("gls").apply(requestHandler))
+                .apis(requestHandler->RequestHandlerSelectors.basePackage("gls.controller").apply(requestHandler))
               //  .paths(PathSelectors.regex("test"))
                .paths(PathSelectors.any())
                 .build();

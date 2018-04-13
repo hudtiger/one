@@ -21,6 +21,13 @@ class DefaultException{
 	int code;
 	String msg;
 	
+	static DefaultException authException=null;
+	public static DefaultException Default() {
+		if(authException==null)
+			authException = new DefaultException(999,"Not Allowed");
+		return authException;
+	}
+	
 	public DefaultException(int code, String msg) {
 		super();
 		this.code = code;
@@ -32,6 +39,4 @@ class DefaultException{
 	public String getMsg() {
 		return msg;
 	}
-	
-	
 }

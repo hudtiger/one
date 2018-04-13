@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import gls.entity.Coffee;
+import gls.entity.User;
 import gls.service.CoffeeService;
 
 @RestController
@@ -26,12 +27,13 @@ public class CoffeeController {
     }
     
     @PostMapping("/coffees/add")
-    public void add(@RequestBody Coffee coffee) {
+    public String add(@RequestBody User coffee) {
     	coffeeService.Add(coffee);
+    	return "Created";
     }
 
     @GetMapping("/coffees")
-    public List<Coffee> all() {
+    public List<User> all() {
         return coffeeService.GetAll();
     }
 }

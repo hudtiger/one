@@ -8,19 +8,23 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Service;
 
 import gls.entity.Coffee;
+import gls.entity.User;
 
 @Service
 public class CoffeeService {
 	@Autowired
-    RedisOperations<String, Coffee> coffeeOps;
+    RedisOperations<String, User> coffeeOps;
 	
-	public List<Coffee> GetAll(){
-		List<Coffee> list = new ArrayList<>();
-		coffeeOps.keys("*").forEach(key->{list.add(coffeeOps.opsForValue().get(key));});
+	public List<User> GetAll(){
+		List<User> list = new ArrayList<>();
+		for(String key : coffeeOps.keys("*")) {
+			System.out.println(key);
+			list.add(coffeeOps.opsForValue().get(key));
+		}
 		return list;
 	}
 	
-	public void Add(Coffee coffee) {
-		coffeeOps.opsForValue().getAndSet(coffee.getId(), coffee);
+	public void Add(User coffee) {
+		coffeeOps.opsForValue().getAndSet(coffee.getId().toString(), coffee);
 	}
 }
