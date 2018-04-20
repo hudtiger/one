@@ -1,0 +1,82 @@
+﻿ CREATE TABLE `local_advisor` (
+  `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `user_idcard` varchar(50) DEFAULT '' COMMENT '身份证号码',
+  `reputation_grade` int(10) DEFAULT '3' COMMENT '信誉等级(默认为3级，最高为5级)',
+  `transaction_score` int(10) DEFAULT '5' COMMENT '交易评分(默认为5分，最高为5分)',
+  `idcard_zimg`  varchar(150) DEFAULT '' COMMENT '身份证正面',
+  `idcard_fimg`  varchar(150) DEFAULT '' COMMENT '身份证反面',
+  `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片',
+  `language_cart_url` varchar(2000) NOT NULL DEFAULT '' COMMENT '语言证书附件地址',
+  `user_resume_url` varchar(2000) NOT NULL DEFAULT '' COMMENT '个人简历附件地址',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14278 DEFAULT CHARSET=utf8 COMMENT='本地顾问表';
+
+
+ CREATE TABLE `buyer` (
+   `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `user_idcard` varchar(50) DEFAULT '' COMMENT '身份证号码',
+  `reputation_grade` int(10) DEFAULT '3' COMMENT '信誉等级(默认为3级，最高为5级)',
+  `transaction_score` int(10) DEFAULT '5' COMMENT '交易评分(默认为5分，最高为5分)',
+  `idcard_zimg`  varchar(150) DEFAULT '' COMMENT '身份证正面',
+  `idcard_fimg`  varchar(150) DEFAULT '' COMMENT '身份证反面',
+  `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14278 DEFAULT CHARSET=utf8 COMMENT='采购商表';
+
+alter table supplier 
+	add column `reputation_grade` int(10) DEFAULT '3' COMMENT '信誉等级(默认为3级，最高为5级)',
+	add column `transaction_score` int(10) DEFAULT '5' COMMENT '交易评分(默认为5分，最高为5分)',
+	add column `main_industry` varchar(150) DEFAULT '' COMMENT '主营行业',
+	add column `idcard_zimg` varchar(150) DEFAULT '' COMMENT '身份证正面',
+	add column `idcard_fimg` varchar(150) DEFAULT '' COMMENT '身份证反面',
+	add column `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片';  
+
+alter table users 
+	drop column USERS_ROLEID,
+	drop column USERS_REALNAME,
+	drop column USERS_IDCARD,
+	drop column COMPANYNAME,
+	drop column MAIN_INDUSTRY,
+	drop column USERS_TRADEPWD,
+	drop column PICTUREPATH,
+	drop column MAIN_PRODUCTS,
+	drop column ENDUPDATE_ID,
+	drop column SALE_CHNNEL,
+	drop column USERS_LANGUAGE,
+	drop column REPUTATION_GRADE,
+	drop column TRANSACTION_SCORE,
+	drop column USERS_INTRODUCES,
+	drop column USERS_ENCLOSURE,
+	drop column USERSR_EMARKS,
+	drop column USERS_HOMEPAGE,
+	-- drop column companyId,
+	drop column fund,
+	drop column code,
+	drop column firstUserId,
+	drop column createUserId,
+	drop column workExp,
+	drop column productsExp,
+	drop column trade,
+	drop column idCardZImg,
+	drop column idCardFImg,
+	drop column passportImg,
+	drop column expertPro,
+	drop column cost,
+	drop column outCost,
+	drop column halflengthphoto,
+	drop column accessData,
+	drop column language_cart_url,
+	drop column user_resume_url;
+
+alter table `menu` add `menu_name_en` varchar(30) NOT NULL DEFAULT '' COMMENT '菜单名称(英)';
+alter table `role_menu` add  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间';
+alter table `role_user` add  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间';
+alter TABLE `roles` 
+  add column `describe` varchar(30) NOT NULL DEFAULT '' COMMENT '备注',
+  add column `inputter` varchar(30) NOT NULL DEFAULT '' COMMENT '输入信息人',
+  add column `date_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '用户创建时间',
+  add column `authoriser` varchar(30) NOT NULL DEFAULT '' COMMENT '授权人',
+  add column `co_code` varchar(30) NOT NULL DEFAULT '' COMMENT '公司编码',
+  add column `dept_code` varchar(30) NOT NULL DEFAULT '' COMMENT '部门编码',
+  add column `teamc_code` varchar(30) NOT NULL DEFAULT '' COMMENT '小组编码',
+  add column `is_enabled` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否启用：0：禁用，1：启用';

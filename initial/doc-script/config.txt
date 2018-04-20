@@ -1,0 +1,10 @@
+lilm(李良明) 04-13 18:36:01
+测试 Redis 缓存
+192.168.1.16:9836 或 139.199.8.134:9836（外网） 密码glsredis_2017
+启动redis
+/data/redis/redis_cache1_9836/bin/redis-server /data/redis/redis_cache1_9836/etc/redis.conf 
+关闭redis
+/data/redis/redis_cache1_9836/bin/redis-cli -h 192.168.1.16 -p 9836 shutdown
+lilm(李良明) 04-13 18:36:54
+gls_dev 测试服mysql 服务器 139.199.8.134（内网192.168.1.16）
+ 主机 192.168.1.16  3306 |  账号 geluosi | 密码 sbbGLS_4dmin777 
