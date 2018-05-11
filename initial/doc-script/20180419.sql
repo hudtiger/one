@@ -19,7 +19,7 @@ CREATE TABLE `contact` (
   `address` varchar(255) DEFAULT '' COMMENT '地址',
   `zipcode` varchar(6) DEFAULT '' COMMENT '邮编',
   `fax` varchar(50) DEFAULT '' COMMENT '传真',
-  `email` varchar(100) DEFAULT '' COMMENT '邮箱',
+  `email` varchar(50) DEFAULT '' COMMENT '邮箱',
   `create_date` datetime DEFAULT current_timestamp() COMMENT '录入时间',
   `department` varchar(50) DEFAULT '' COMMENT '部门',
   `imgUrl` varchar(255) DEFAULT '' COMMENT '头像',
@@ -40,6 +40,9 @@ CREATE TABLE `contact` (
   `twitter` varchar(20) DEFAULT '' COMMENT 'Twitter',
   `msn` varchar(20) DEFAULT '' COMMENT 'MSN',
   `sex` varchar(6) DEFAULT '' COMMENT '性别  不存1/2的话,国际化男女字符数要调整',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`contact_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85271 DEFAULT CHARSET=utf8 COMMENT='联系人信息表';
 
@@ -64,6 +67,9 @@ CREATE TABLE `email_content` (
   `state` int(11) DEFAULT 3 COMMENT '状态：1 自己发的  2 收到的   3 表示未发送（草稿）',
   `flag` int(20) DEFAULT 0 COMMENT '标志（1:转发2:回复3：回复全部）',
   `size` varchar(200) DEFAULT '' COMMENT '邮件大小',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8385 DEFAULT CHARSET=utf8;
 
@@ -75,6 +81,9 @@ CREATE TABLE `email_content` (
   `receive_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '收件用户id',
   `con_id` int(11) NOT NULL DEFAULT 0 COMMENT '邮件id',
   `rtime` date NOT NULL DEFAULT 0 COMMENT '记录时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -94,6 +103,9 @@ CREATE TABLE `email_user` (
   `sign_enabled` int(11) DEFAULT 0 COMMENT '是否启用签名（0-不是，1-是）',
   `pop_ssl` int(5) DEFAULT 1 COMMENT 'ssl协议，0为否，1为是',
   `smtp_ssl` int(5) DEFAULT 1 COMMENT 'ssl协议',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8; 
 
@@ -114,6 +126,9 @@ CREATE TABLE `email_user` (
   `cost` varchar(20) DEFAULT 0 COMMENT '产销对接服务费,内部外部以逗号隔开（暂时）',
   `flag` int(5) DEFAULT 0 COMMENT '客户类型：1.已合作客户，2.重要客户，3.潜在客户',
   `inside_outside` int(1) unsigned zerofill DEFAULT 1 COMMENT '0-内部，1-外部',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`sr_id`),
   UNIQUE KEY `unique_sc` (`sid`,`cid`) USING BTREE,
   UNIQUE KEY `unique_sl` (`sid`,`local_id`) USING BTREE,
@@ -136,6 +151,9 @@ CREATE TABLE `message` (
   `supplier_id` int(20) DEFAULT -10000 COMMENT '公司ID',
   `product_id` int(20) DEFAULT -10000 COMMENT '产品id',
   `grouporder_id` int(20) DEFAULT -10000 COMMENT '拼单ID',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8244 DEFAULT CHARSET=utf8 COMMENT='消息表'; 
 
@@ -158,7 +176,15 @@ CREATE TABLE `user_follow` (
   `supplier_id` int(11) DEFAULT -10000 COMMENT '供应商ID',
   `type` int(1) DEFAULT 0 COMMENT '类型（0-关注产品，1-关注公司）',
   `is_dayout` int(11) DEFAULT '0' COMMENT '数据是否过期【有没有用】（-1-过期，0-没过期）',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8  COMMENT '关注表';
 
 -- insert into user_follow select * from gls_user_follow;
+
+
+
+
+

@@ -1,0 +1,102 @@
+ CREATE TABLE `product` (
+  `product_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '产品id',
+  `supplier_id` int(10) DEFAULT -10000 COMMENT '公司ID',
+  `category_id` int(10) DEFAULT 10000 COMMENT '产品类型',
+  `product_name` varchar(255) DEFAULT '' COMMENT '产品名称',
+  `model_no` varchar(50) DEFAULT '' COMMENT '产品型号',
+  `brand_name` varchar(50) DEFAULT '' COMMENT '品牌名称',
+  `moq` varchar(50) DEFAULT '' COMMENT '最小订货量（MOQ）',
+  `fob` varchar(100) DEFAULT '' COMMENT '离岸价格',
+  `special_features` text COMMENT '产品描述',
+  `unit_type` varchar(50) DEFAULT '' COMMENT '产品计量单位',
+  `currency_type` varchar(50) DEFAULT '' COMMENT '币种',
+  `create_date` datetime DEFAULT current_timestamp() COMMENT '录入时间',
+  `type1` int(11) DEFAULT 0 COMMENT '1 无审厂报告   0有审厂报告',
+  `is_new` int(11) DEFAULT 1 COMMENT '是否新产品（0-不是，1-是）',
+  `is_hot` int(11) DEFAULT 0 COMMENT '是否热销产品（0-不是，1-是）',
+  `product_url` varchar(255) DEFAULT '' COMMENT '产品图片',
+  `state` int(11) DEFAULT 0 COMMENT '上架状态 0为下架 1为上架 2，删除',
+  `tgp_qty` int(11) DEFAULT 0 COMMENT '20''GP规格集装箱装载数量（单位：set）',
+  `fgp_qty` int(11) DEFAULT 0 COMMENT '40''GP规格集装箱装载数量（单位：set）',
+  `fhq_qty` int(11) DEFAULT 0 COMMENT '40''HQ规格集装箱装载数量（单位：set）',
+  `ffhq_qty` int(11) DEFAULT 0 COMMENT '45''HQ规格集装箱装载数量（单位：set）',
+  `tr_qty` int(11) DEFAULT 0 COMMENT '20''Refrigerated规格集装箱装载数量（单位：set）',
+  `fr_qty` int(11) DEFAULT 0 COMMENT '40''Refrigerated规格集装箱装载数量（单位：set）',
+  `inner_package_length` bigint(20) DEFAULT 0 COMMENT '内包装大小:长',
+  `inner_package_width` bigint(20) DEFAULT 0 COMMENT '内包装大小:宽',
+  `inner_package_high` bigint(20) DEFAULT 0 COMMENT '内包装大小:高',
+  `inner_package_qty` bigint(20) DEFAULT 0 COMMENT '内包装可装产品数',
+  `outer_package_length` bigint(20) DEFAULT 0 COMMENT '外包装纸箱大小:长',
+  `outer_package_width` bigint(20) DEFAULT 0 COMMENT '外包装纸箱大小:宽',
+  `outer_package_high` bigint(20) DEFAULT 0 COMMENT '外包装纸箱大小:高',
+  `outer_package_qty` bigint(20) DEFAULT 0 COMMENT '外包装纸箱可装产品数',
+  `commission_rate` decimal(8,2) DEFAULT '0.00' COMMENT '销售佣金(%)',
+  `product_length` bigint(20) DEFAULT 0 COMMENT '产品长',
+  `product_width` bigint(20) DEFAULT 0 COMMENT '产品宽',
+  `product_high` bigint(20) DEFAULT 0 COMMENT '产品高',
+  `shipment_term` varchar(30) DEFAULT '' COMMENT '装运条款(FOB、CFR、CIF、EXW、CIP、CPT、DDU、DDP、FCA、FAS、DAF、DES、DEQ、Express Delivery)',
+  `product_unit` varchar(20) NOT NULL DEFAULT '' COMMENT '产品尺寸单位',
+  `product_gross_weight` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '产品净重',
+  `product_net_weight` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '产品毛重',
+  `product_weight_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '产品重量单位',
+  `product_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '产品类型，默认0，0：进口，1：自营',
+  `grouporder_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '拼单类型，默认0，0：总数达到MOQ，1：单个SKU达到MOQ',
+  `loading_port` varchar(20) NOT NULL DEFAULT '' COMMENT '装货港口',
+  `check_state` int(10) DEFAULT 0 COMMENT '0审核中 1审核通过 -1不通过',
+  `home` int(10) DEFAULT 0,
+  `up_time` datetime DEFAULT NULL,
+  `down_time` datetime DEFAULT NULL,
+  `product_sn` varchar(40) DEFAULT NULL COMMENT '产品编码',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
+  PRIMARY KEY (`product_id`),
+  KEY `type` (`type1`) USING BTREE,
+  KEY `supplierid` (`supplier_id`) USING BTREE,
+  KEY `state` (`state`) USING BTREE,
+  KEY `pname` (`product_name`) USING BTREE,
+  KEY `moq` (`moq`) USING BTREE,
+  KEY `prourl` (`product_url`) USING BTREE,
+  KEY `fob` (`fob`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=821281 DEFAULT CHARSET=utf8 COMMENT='产品信息表';
+
+-- insert into product select * from gls_product;
+
+CREATE TABLE `product_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL COMMENT '类别名称',
+  `name_zh` varchar(100) NOT NULL DEFAULT '' COMMENT '行业名对应的中文，新版',
+  `name_ja` varchar(100) NOT NULL DEFAULT '' COMMENT '行业名对应的日语，新版',
+  `name_en` varchar(100) NOT NULL DEFAULT '' COMMENT '行业名对应的英语，新版',
+  `name_es` varchar(100) NOT NULL DEFAULT '' COMMENT '行业名对应的西班牙语，新版',
+  `name_ru` varchar(100) NOT NULL DEFAULT '' COMMENT '行业名对应的俄罗斯语，新版',
+  `short_name` varchar(255) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL COMMENT '级别',
+  `url` varchar(255) DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL COMMENT '父级ID',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18731 DEFAULT CHARSET=utf8 COMMENT='全球资源的分类数据'; 
+
+-- insert into product_category select * from gls_gs_type;
+
+ CREATE TABLE `product_language` (
+  `product_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '产品id',
+  `supplier_id` int(10) DEFAULT -10000 COMMENT '公司ID',
+  `create_user_id` int(10) DEFAULT -10000,
+  `product_name` varchar(255) DEFAULT '' COMMENT '产品名称',
+  `special_features` text COMMENT '产品描述',
+  `locale` varchar(20) DEFAULT '0',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
+  PRIMARY KEY (`product_id`),
+  KEY `supplier_id` (`supplier_id`) USING BTREE,
+  KEY `product_name` (`product_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=821267 DEFAULT CHARSET=utf8 COMMENT='产品语言表';
+
+-- insert into product_language select * from gls_product_language;
+
+

@@ -8,28 +8,49 @@
   `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片',
   `language_cart_url` varchar(2000) NOT NULL DEFAULT '' COMMENT '语言证书附件地址',
   `user_resume_url` varchar(2000) NOT NULL DEFAULT '' COMMENT '个人简历附件地址',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14278 DEFAULT CHARSET=utf8 COMMENT='本地顾问表';
 
 
  CREATE TABLE `buyer` (
-   `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `user_idcard` varchar(50) DEFAULT '' COMMENT '身份证号码',
+  `buyer_name` varchar(200) NOT NULL DEFAULT '' COMMENT '采购商公司名称',
+  `logo_url` varchar(200) NOT NULL DEFAULT '' COMMENT '公司logoURL',
+  `introduction` varchar(2000) NOT NULL DEFAULT '' COMMENT '公司介绍',
+  `busi_license_url` varchar(200) NOT NULL DEFAULT '' COMMENT '营业执照附件URL',
+  `busi_license_sdate` varchar(10) NOT NULL DEFAULT '' COMMENT '营业执照生效日期yyyy-mm-dd',
+  `busi_license_edate` varchar(10) NOT NULL DEFAULT '' COMMENT '营业执照有效截止日期 yyyy-mm-dd',
+  `legal_person` varchar(20) NOT NULL DEFAULT '' COMMENT '法人',
+  `country` varchar(20) NOT NULL DEFAULT '' COMMENT '国家',
+  `province` varchar(20) NOT NULL DEFAULT '' COMMENT '省/州份',
+  `city` varchar(20) NOT NULL DEFAULT '' COMMENT '城市',
+  `address` varchar(200) NOT NULL DEFAULT '' COMMENT '详细地址',
   `reputation_grade` int(10) DEFAULT '3' COMMENT '信誉等级(默认为3级，最高为5级)',
   `transaction_score` int(10) DEFAULT '5' COMMENT '交易评分(默认为5分，最高为5分)',
   `idcard_zimg`  varchar(150) DEFAULT '' COMMENT '身份证正面',
   `idcard_fimg`  varchar(150) DEFAULT '' COMMENT '身份证反面',
   `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14278 DEFAULT CHARSET=utf8 COMMENT='采购商表';
 
+
 alter table supplier 
+    add column `user_idcard` varchar(50) DEFAULT '' COMMENT '身份证号码',
 	add column `reputation_grade` int(10) DEFAULT '3' COMMENT '信誉等级(默认为3级，最高为5级)',
 	add column `transaction_score` int(10) DEFAULT '5' COMMENT '交易评分(默认为5分，最高为5分)',
 	add column `main_industry` varchar(150) DEFAULT '' COMMENT '主营行业',
 	add column `idcard_zimg` varchar(150) DEFAULT '' COMMENT '身份证正面',
 	add column `idcard_fimg` varchar(150) DEFAULT '' COMMENT '身份证反面',
 	add column `passport_img` varchar(150) DEFAULT '' COMMENT '护照图片';  
+alter table supplier 
+	drop column user_id;
 
 alter table users 
 	drop column USERS_ROLEID,
@@ -80,3 +101,9 @@ alter TABLE `roles`
   add column `dept_code` varchar(30) NOT NULL DEFAULT '' COMMENT '部门编码',
   add column `teamc_code` varchar(30) NOT NULL DEFAULT '' COMMENT '小组编码',
   add column `is_enabled` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否启用：0：禁用，1：启用';
+
+
+-- alter table `buyer` 
+--   add column `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+--   add column `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+--   add column `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识:0.可用;1.已删除不可用';
