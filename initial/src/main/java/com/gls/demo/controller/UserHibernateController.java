@@ -1,5 +1,7 @@
 package com.gls.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,7 @@ public class UserHibernateController {
 	}
 
 	@GetMapping(path = "/add")
-	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String content) {
+	public String addNewUser(@RequestParam String name, @RequestParam String content) {
 		User n = new User();
 		n.setName(name);
 		n.setContent(content);
@@ -37,7 +39,7 @@ public class UserHibernateController {
 	}
 
 	@GetMapping(path = "/all")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		return userRepository.findAll();
+	public List<User> getAllUsers() {
+		return (List<User>) userRepository.findAll();
 	}
 }

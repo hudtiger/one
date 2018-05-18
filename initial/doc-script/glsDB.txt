@@ -90,12 +90,12 @@ alter table users
 	drop column user_resume_url;
 
 alter table `menu` add `menu_name_en` varchar(30) NOT NULL DEFAULT '' COMMENT '菜单名称(英)';
-alter table `role_menu` add  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间';
-alter table `role_user` add  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间';
+alter table `role_menu` add  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间';
+alter table `role_user` add  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'';
 alter TABLE `roles` 
   add column `describe` varchar(30) NOT NULL DEFAULT '' COMMENT '备注',
   add column `inputter` varchar(30) NOT NULL DEFAULT '' COMMENT '输入信息人',
-  add column `date_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '用户创建时间',
+  add column `date_time` timestamp NOT NULL DEFAULT '1990-01-01 00:00:00' COMMENT '用户创建时间',
   add column `authoriser` varchar(30) NOT NULL DEFAULT '' COMMENT '授权人',
   add column `co_code` varchar(30) NOT NULL DEFAULT '' COMMENT '公司编码',
   add column `dept_code` varchar(30) NOT NULL DEFAULT '' COMMENT '部门编码',

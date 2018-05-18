@@ -13,6 +13,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import io.swagger.annotations.ApiOperation;
+
 @Component
 public class RouteFactory {
 	@Autowired
@@ -31,9 +33,10 @@ public class RouteFactory {
 			patterns = item.getKey().getPatternsCondition().getPatterns();
 			method = item.getValue();
 			Comment cmt = method.getMethodAnnotation(Comment.class); // 注解
+			ApiOperation opt = method.getMethodAnnotation(ApiOperation.class);
 			for (String url : patterns) {
 				list.add(new MapInfo(url, method.getBean().toString(), method.getMethod().getName(),
-						cmt == null ? "" : cmt.value()));
+						opt == null ? cmt==null?"":cmt.value() : opt.value()));
 			}
 		}
 		list.forEach(mapInfo -> System.out.println(mapInfo.toString()));

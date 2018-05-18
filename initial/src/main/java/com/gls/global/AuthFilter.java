@@ -86,6 +86,7 @@ public class AuthFilter  implements Filter {
 	void beforeDone(ServletRequest request, ServletResponse response) throws IOException, ServletException {
 		response.setCharacterEncoding("utf-8");
 		HttpServletRequest req = (HttpServletRequest) request;
+		
 		String url = req.getRequestURI(); // 当前请求的url
 		System.out.println(url);
 
