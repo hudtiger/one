@@ -1,4 +1,4 @@
-==================================Dockerfile(ssh based ubuntu:17.04)=====================
+﻿==================================Dockerfile(ssh based ubuntu:17.04)=====================
 # Docker image of ssh
 # VERSION 0.0.1
 # Author: Rri
@@ -24,14 +24,63 @@ EXPOSE 22
 docker build -t ubuntu:ssh .
 docker run -d -p 2223:22 ubuntu:ssh
 ssh root@172.31.255.106 -p 2223
-
 docker run -d --name docker-ssh -p 2223:22 ubuntu:ssh
-docker run -d --name docker-ssh --volume /usr/local/mongodata:/data/db -p 27017:27017 mongo --auth
 
+use admin
+db.createUser({user:"root",pwd:"password",roles:["root"]})
+db.createUser(  
+  {  
+    user: "admin",  
+    pwd: "password",  
+    roles: [{role: "userAdminAnyDatabase", db: "admin"}]  
+  }  
+)
+use admin
+db.auth("admin","password");
+
+use ballmatch
+db.createUser({
+    user: "football",
+    pwd: "password",
+    roles: [{role: "readWrite",db: "ballmatch"}]
+})
+修改mongod.conf文件
+security:
+  authorization: enabled//启用授权
+
+#启动mongodb
 /usr/bin/mongod --quiet -f /etc/mongod.conf
-
-mongo uName:uPwd@192.168.56.102:27017/test
+#客户端连接
+mongo -uuserA -p123456 192.168.56.102/test
 mongo 192.168.56.102:27017/test
+
+#安装服务
+****************************lib/systemd/system/mongdb.service****************************************************
+[Unit]
+Description=High-performance, schema-free document-oriented database
+Documentation=man:mongod(1)
+After=network.target
+
+[Service]
+Type=forking
+User=mongodb
+Group=mongodb
+RuntimeDirectory=mongod
+PIDFile=/var/run/mongod/mongod.pid
+ExecStart=/usr/bin/mongod -f /etc/mongod.conf --pidfilepath /var/run/mongod/mongod.pid --fork
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+*************************************************************************************************************************
+#权限相关
+chown -R mongodb:mongodb /var/lib/mongodb
+#启动关闭服务
+systemctl start mongod
+systemctl stop mongod
+service mongod start
+service mongod stop
 
 1、Help查看命令提示
 help

@@ -1,0 +1,462 @@
+#安装DockerToolbox-18.03.0-ce.exe
+
+#安装docker-machine
+If you are running with Windows with Git BASH:
+$ base=https://github.com/docker/machine/releases/download/v0.14.0 &&
+  mkdir -p "$HOME/bin" &&
+  curl -L $base/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" &&
+  chmod +x "$HOME/bin/docker-machine.exe"
+ref :https://docs.docker.com/machine/install-machine/#install-machine-directly
+
+#安装Kitematic-0.17.c-Windows
+
+#安装docker-elasticsearch镜像
+
+#安装elasticsearch可视化工具kibana
+*****************************************************************************************
+*  #下载
+*  wget https://artifacts.elastic.co/downloads/kibana/kibana-6.2.4-linux-x86_64.tar.gz
+*  #解压
+*  tar zxvf kibana-6.2.4-linux-x86_64.tar.gz
+*  #配置
+*  cd kibana-6.2.4-linux-x86_64/config
+*  vim kibana.yml
+*  #主要配置以下
+*  server.port: 5601   #记得防火墙设置这个端口可访问
+*  server.host: "0.0.0.0"  #默认是本机才能访问，我们希望外部也能访问
+*  elasticsearch.url: "http://192.168.99.100:32773"  #对应elasticsearch http://host:9200
+*  cd kibana-6.2.4-linux-x86_64/bin/
+*  ./kibana
+*****************************************************************************************
+ref：https://blog.csdn.net/github_26672553/article/details/70239439
+ref：https://www.cnblogs.com/moonlightL/p/7764919.html
+
+elasticsearch document
+ref：https://es.xiaoleilu.com/010_Intro/20_Document.html
+
+#安装ps
+apt-get install procps
+apt install net-tools       # ifconfig 
+apt install iputils-ping     # ping
+
+#elasticsearch-jdbc mysql数据同步
+https://blog.csdn.net/qq_38046109/article/details/70224133
+#安装elasticsearch-jdbc
+cd /usr/share/elasticsearch
+wget http://xbib.org/repository/org/xbib/elasticsearch/importer/elasticsearch-jdbc/2.3.4.0/elasticsearch-jdbc-2.3.4.0-dist.zip 
+unzip -d ./elasticsearch-jdbc elasticsearch-jdbc-2.3.4.0-dist.zip
+ref：https://blog.csdn.net/qq_28169023/article/details/74908464
+
+#ubuntu下安装elasticsearch及mysql数据同步
+https://blog.csdn.net/baalhuo/article/details/78081170
+
+
+curl -XPOST "http://192.168.99.100:32773/zhouls/user/9/_create" -H 'Content-Type: application/json' -d' {"name" : "Micheal"  , "age" : 38}'
+
+#批量导入数据从mysql->elasticsearch
+curl -XPOST "http://192.168.99.100:32773/zhouls/user/9/_create" -H 'Content-Type: application/json' -d' {"name" : "Micheal"  , "age" : 38}'
+select concat('curl -XPOST "http://192.168.56.102:32666/test/note/',fid,'/_create" -H "Content-Type: application/json" -d ''', json_object("fid",fid,"fdate",FDate,"fnote",fnote),'''') from  PTable0 into outfile '/var/lib/mysql-files/toes.sh';
+bash /var/lib/mysql-files/toes.sh;
+
+#查询
+
+
+
+
+
+*************************************************elasticsearch on docker *********************************
+ref: https://hub.docker.com/_/elasticsearch/
+$ docker pull elasticsearch
+One example of adding clustering support is to pass the configuration on the docker run:
+$ docker run -d --name elas elasticsearch -Etransport.host=0.0.0.0 -Ediscovery.zen.minimum_master_nodes=1
+
+You can run the default elasticsearch command simply:
+$ docker run -d elasticsearch
+
+You can also pass in additional flags to elasticsearch:
+$ docker run -d elasticsearch -Des.node.name="TestNode"
+
+This image comes with a default set of configuration files for elasticsearch, but if you want to provide your own set of configuration files, you can do so via a volume mounted at /usr/share/elasticsearch/config:
+$ docker run -d -v "$PWD/config":/usr/share/elasticsearch/config elasticsearch
+
+This image is configured with a volume at /usr/share/elasticsearch/data to hold the persisted index data. Use that path if you would like to keep the data in a mounted volume:
+$ docker run -d -v "$PWD/esdata":/usr/share/elasticsearch/data elasticsearch
+
+This image includes EXPOSE 9200 9300 (default http.port), so standard container linking will make it 
+$ docker run -d -p 32666:9200 -p 32668:9300 elasticsearch
+****************************************************************************************************************
+
+select concat('curl -XPOST "http://192.168.56.102:32666/test/db/',@i:=@i+1,'/_create" -H "Content-Type: application/json" -d ''', JSON_Object("tablename",table_name,"colname",column_name,"position",ordinal_position,"datatype",data_type),'''') from information_schema.columns,(select @i:=0) T into outfile '/var/lib/mysql-files/db.sh';
+select concat('curl -XPOST "http://192.168.56.102:32666/test/db/',@i:=@i+1,'/_create" -H "Content-Type: application/json" -d ''', JSON_Object("tablename",table_name,"colname",column_name,"position",ordinal_position,"datatype",data_type),'''') from information_schema.columns,(select @i:=0) T where table_schema='testDB' into outfile '/var/lib/mysql-files/db.sh';
+bash /var/lib/mysql-files/db.sh;
+
+#.1
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "from": 10,  //从第10条开始
+  "size": 20,  //取20条，size为0时只返回聚合数据
+  "aggs": {
+    "group_by_datatype": {
+      "terms": {
+        "field": "datatype.keyword" ,
+        "order": {
+          "sum_position": "asc"
+        }        
+      },
+      "aggs" : {
+                "sum_position" : {
+                    "sum" : { "field" : "position" }
+                }
+            }
+    }
+  }
+}'
+
+#.2  
+#select tablename,colname,position,datatype from test.db limit 1;
+#select tablename as key,count(1) as doc_count,max(position) as max_position 
+  from test.db
+    where tablename not rlike '(events|table).*'
+	group by tablename 
+	having max(position)>50 limit 3
+	order by count(1) desc;
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 1, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "aggs": {
+    "group_by_tablename": {
+      "terms" : { 
+        "field" : "tablename.keyword",
+		"exclude": "(events|table).*",
+		"order": {
+          "_count": "desc" //按统计数量排序，也可字典排序 { "_term" : "asc" }，也可字段排序{ "tablename":"asc"}
+        }, 
+		"size": 1000  //如果返回的不是所有分组，排序结果不对，
+					//原因：es排序规则，是从每个分页中取相同数量的数据，再排序，当返回的不是所有分组时候，排序的结果自然不对
+      },
+      "aggs": {
+        "max_position": {
+          "max": {
+            "field": "position"
+          }
+        },
+        "result_filter":{
+          "bucket_selector": {
+            "buckets_path": {
+              "maxPosition":"max_position"
+            },
+            "script": "params.maxPosition >50"
+          } 
+        }
+      }
+    }
+  }
+}'
+
+#.3 多字段分组
+#select tablename,colname,position,datatype from test.db limit 1;
+#select a.*,b.* from 
+(select tablename as key,count(1) as doc_count from test.db group by tablename) a  inner join 
+(select tablename,datatype as key,count(1) as doc_count from test.db group by tablename,datatype) b on b.tablename=a.key 
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 1, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "aggs": {
+    "group_by_tablename": {
+      "terms" : { 
+        "field" : "tablename.keyword",		//filter
+        "exclude": "(events|table).*",		//filter
+        "size": 300
+      },
+      "aggs": {
+        "group_by_datatype": {
+          "terms" : { 
+            "field" : "datatype.keyword",
+            "include": "text"				//filter
+          }
+        }
+      }
+    }
+  }
+}'
+
+#.4 取tablename的基数
+#select count(distinct tablename) from test.db
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "aggs": {
+    "table_cardinality": {
+      "cardinality": {
+        "field": "tablename.keyword"
+      }
+    }
+  }
+}'
+
+#.5 取tablename的stats
+#select count(position),min(position),max(position),sum(position),avg(position) from test.db
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "aggs": {
+    "position_stats": {
+      "stats": {
+        "field": "position"
+      }
+    }
+  }
+}'
+
+#.6 取tablename的stats
+#select count(position),min(position),max(position),sum(position),avg(position),sum_of_squares(position),variance(position),std_deviation(position) from test.db
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "aggs": {
+    "position_extends_stats": {
+      "extended_stats": {
+        "field": "position"
+      }
+    }
+  }
+}'
+
+#.7使用脚本分组
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+   "aggs" : {
+        "tablename" : {
+            "terms" : {
+                "script" : "doc[\"tablename.keyword\"].value"
+            }
+        }
+    }
+}'
+
+#.8使用匹配度聚合
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 10, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "match_phrase_prefix": {
+      "datatype": "var"
+    }
+  },
+   "aggs" : {
+        "tablename" : {
+            "terms" : {
+                "script" : "_score", 
+                "order": {
+                  "_term": "desc"
+                }
+            }
+        }
+    }
+}'
+
+
+#.9使用top_hits取分组明细消息
+select tablename,colname,position,datatype,
+	count(1) over() as hits.total,
+	count(1) over(partition by datatype) as detail.total,
+	sum(position) over(partition by datatype) as detail.positon_sum
+ from test.db
+ where datatype like 'var%' and position between 1 and 5
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "bool": {
+      "must": [   //must:and(需要打分);	must_not: all not;	should:or;	filter:and(不进行打分)
+        {
+          "range": {
+            "position": {
+              "gte": 1,
+              "lte": 5
+            }
+          }
+        },
+        {
+          "match_phrase_prefix": {
+            "datatype": "var"
+          }
+        }
+      ]
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": {
+                  "_term": "desc"
+                }
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'
+
+
+#.9使用top_hits取分组明细消息
+select tablename,colname,position,datatype,
+	count(1) over() as hits.total,
+	count(1) over(partition by datatype) as detail.total,
+	sum(position) over(partition by datatype) as detail.positon_sum
+ from test.db
+ where datatype like 'var%' or position between 1 and 5
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "dis_max": { //dis_max返回最佳评分的结果
+      "queries": [
+      {
+          "range": {
+            "position": {
+              "gte": 1,
+              "lte": 5
+            }
+          }
+        },
+        {
+          "match_phrase_prefix": {
+            "datatype": "var"
+          }
+        }
+      ],
+       "tie_breaker": 0.3 //调节匹配度，同时满足匹配度更高
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": {
+                  "_term": "desc"
+                }
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'
+
+
+#测试数据
+curl -XPUT "http://192.168.56.102:32666/test/db/4001" -H 'Content-Type: application/json' -d'
+{
+  "colname": "a jump dog jumping a wolf",
+  "datatype": "varchar",
+  "position": 3,
+  "tablename": "a jump dog"
+}'
+curl -XPUT "http://192.168.56.102:32666/test/db/4002" -H 'Content-Type: application/json' -d'
+{
+  "colname": "a wolf crash some cowns",
+  "datatype": "varchar",
+  "position": 3,
+  "tablename": "a jump wolf"
+}'
+
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "dis_max": { 
+      "queries": [
+        { "match": { "colname":  "wolf jump" }},
+        { "match": { "tablename": "wolf jump" }}
+      ],
+      "tie_breaker": 0.3
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": {
+                  "_term": "desc"
+                }
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'
+
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 0, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "multi_match": {
+      "query":                "jump wolf",
+      "type":                 "best_fields",    
+      "fields":               [ "tablename", "colname" ],
+      "tie_breaker":          0.3,
+      "minimum_should_match": "30%" 
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": {
+                  "_term": "desc"
+                }
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'

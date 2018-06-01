@@ -1,0 +1,151 @@
+#修改环境变量
+mysql>system gdb -p $(pidof mysqld) -ex "set opt_log_slave_updates=1" -batch
+
+#临时/持久化修改环境变量
+mysql> SET GLOBAL max_connections = 500
+mysql> SET PERSIST max_connections = 500
+
+#隐藏/显示索引
+mysql>ALTER TABLE t ALTER INDEX i INVISIBLE;
+mysql>ALTER TABLE t ALTER INDEX i VISIBLE;
+
+#CTE公共查询
+mysql> With RECURSIVE T 
+ as (
+	 select 1 num from dual 
+	 union 
+	 select num+1 from T where num<10
+ ) 
+ select * from T;
+
+mysql> create table CTE
+(
+	FID int auto_increment primary key, 
+	FName varchar(20) not null default '',
+	FManager int default -1
+);
+mysql> insert into CTE(FName,FManager) values ('micheal',-1),('micy',1),('chen',1),('zhou',3),('chon',2),('cheny',4);
+mysql> select * from CTE;
++-----+---------+----------+
+| FID | FName   | FManager |
++-----+---------+----------+
+|   1 | micheal |       -1 |
+|   2 | micy    |        1 |
+|   3 | chen    |        1 |
+|   4 | zhou    |        3 |
+|   5 | chon    |        2 |
+|   6 | cheny   |        4 |
++-----+---------+----------+
+mysql> with RECURSIVE CTEMeno(FID,FName,ManagePath) 
+as 
+(
+	select FID,FName,cast(FID as char(50)) from CTE where FManager=-1
+	union
+	select c.FID,c.FName,concat(m.ManagePath,',',c.FID) from CTEMeno m inner join CTE c on m.FID=c.FManager
+) select * from CTEMeno;
++------+---------+------------+
+| FID  | FName   | ManagePath |
++------+---------+------------+
+|    1 | micheal | 1          |
+|    2 | micy    | 1,2        |
+|    3 | chen    | 1,3        |
+|    4 | zhou    | 1,3,4      |
+|    5 | chon    | 1,2,5      |
+|    6 | cheny   | 1,3,4,6    |
++------+---------+------------+
+
+#窗口函数over([partition by ...][order by ...])
+mysql> with RECURSIVE CTEMeno(FID,FName,ManagePath)  
+as  
+( 
+	select FID,FName,cast(FID as char(50)) from CTE where FManager=-1 
+	union 
+	select c.FID,c.FName,concat(m.ManagePath,',',c.FID) from CTEMeno m inner join CTE c on m.FID=c.FManager 
+) select FID,FNAME,ManagePath,count(1) over(),count(1) over(partition by left(FName,1)) from CTEMeno;
++------+---------+------------+-----------------+-------------------------------------------+
+| FID  | FNAME   | ManagePath | count(1) over() | count(1) over(partition by left(FName,1)) |
++------+---------+------------+-----------------+-------------------------------------------+
+|    3 | chen    | 1,3        |               6 |                                         3 |
+|    5 | chon    | 1,2,5      |               6 |                                         3 |
+|    6 | cheny   | 1,3,4,6    |               6 |                                         3 |
+|    1 | micheal | 1          |               6 |                                         2 |
+|    2 | micy    | 1,2        |               6 |                                         2 |
+|    4 | zhou    | 1,3,4      |               6 |                                         1 |
++------+---------+------------+-----------------+-------------------------------------------+
+
+
+
+***FIRST_VALUE()
+***LAG()
+***LEAD()
+***LAST_VALUE()
+***NTH_VALUE()
+
+***NTILE()
+
+***CUME_DIST()
+***ROW_NUMBER()
+***RANK()
+***PERCENT_RANK()
+***DENSE_RANK()
+
+mysql> select FID,FName,FManager,row_number() over(order by FManager),rank() over(order by FManager),dense_rank() over(order by FManager) from CTE;
++-----+---------+----------+--------------------------------------+--------------------------------+--------------------------------------+
+| FID | FName   | FManager | row_number() over(order by FManager) | rank() over(order by FManager) | dense_rank() over(order by FManager) |
++-----+---------+----------+--------------------------------------+--------------------------------+--------------------------------------+
+|   1 | micheal |       -1 |                                    1 |                              1 |                                    1 |
+|   2 | micy    |        1 |                                    2 |                              2 |                                    2 |
+|   3 | chen    |        1 |                                    3 |                              2 |                                    2 |
+|   5 | chon    |        2 |                                    4 |                              4 |                                    3 |
+|   4 | zhou    |        3 |                                    5 |                              5 |                                    4 |
+|   6 | cheny   |        4 |                                    6 |                              6 |                                    5 |
++-----+---------+----------+--------------------------------------+--------------------------------+--------------------------------------+
+
+mysql> select percent_rank() over(order by fmanager), cume_dist() over(order by fmanager),FID,FName,FManager from CTE;
++----------------------------------------+-------------------------------------+-----+---------+----------+
+| percent_rank() over(order by fmanager) | cume_dist() over(order by fmanager) | FID | FName   | FManager |
++----------------------------------------+-------------------------------------+-----+---------+----------+
+|                                      0 |                 0.16666666666666666 |   1 | micheal |       -1 |
+|                                    0.2 |                                 0.5 |   2 | micy    |        1 |
+|                                    0.2 |                                 0.5 |   3 | chen    |        1 |
+|                                    0.6 |                  0.6666666666666666 |   5 | chon    |        2 |
+|                                    0.8 |                  0.8333333333333334 |   4 | zhou    |        3 |
+|                                      1 |                                   1 |   6 | cheny   |        4 |
++----------------------------------------+-------------------------------------+-----+---------+----------+
+
+mysql> select FID,FName,FManager,first_value(fname) over(partition by fmanager),last_value(fname) over(partition by fmanager) from CTE;
++-----+---------+----------+------------------------------------------------+-----------------------------------------------+
+| FID | FName   | FManager | first_value(fname) over(partition by fmanager) | last_value(fname) over(partition by fmanager) |
++-----+---------+----------+------------------------------------------------+-----------------------------------------------+
+|   1 | micheal |       -1 | micheal                                        | micheal                                       |
+|   2 | micy    |        1 | micy                                           | chen                                          |
+|   3 | chen    |        1 | micy                                           | chen                                          |
+|   5 | chon    |        2 | chon                                           | chon                                          |
+|   4 | zhou    |        3 | zhou                                           | zhou                                          |
+|   6 | cheny   |        4 | cheny                                          | cheny                                         |
++-----+---------+----------+------------------------------------------------+-----------------------------------------------+
+
+mysql> select FID,FManager,first_value(fname) over(),nth_value(fname,3) over(),lag(fname,1) over(),FName,lead(fname,1) over(),last_value(fname) over() from CTE;
++-----+----------+---------------------------+---------------------------+---------------------+---------+----------------------+--------------------------+
+| FID | FManager | first_value(fname) over() | nth_value(fname,3) over() | lag(fname,1) over() | FName   | lead(fname,1) over() | last_value(fname) over() |
++-----+----------+---------------------------+---------------------------+---------------------+---------+----------------------+--------------------------+
+|   1 |       -1 | micheal                   | chen                      | NULL                | micheal | micy                 | cheny                    |
+|   2 |        1 | micheal                   | chen                      | micheal             | micy    | chen                 | cheny                    |
+|   3 |        1 | micheal                   | chen                      | micy                | chen    | zhou                 | cheny                    |
+|   4 |        3 | micheal                   | chen                      | chen                | zhou    | chon                 | cheny                    |
+|   5 |        2 | micheal                   | chen                      | zhou                | chon    | cheny                | cheny                    |
+|   6 |        4 | micheal                   | chen                      | chon                | cheny   | NULL                 | cheny                    |
++-----+----------+---------------------------+---------------------------+---------------------+---------+----------------------+--------------------------+
+
+mysql> select ntile(4) over(),FID,FName,FManager from CTE; //查询分散到指定批中
++-----------------+-----+---------+----------+
+| ntile(4) over() | FID | FName   | FManager |
++-----------------+-----+---------+----------+
+|               1 |   1 | micheal |       -1 |
+|               1 |   2 | micy    |        1 |
+|               2 |   3 | chen    |        1 |
+|               2 |   4 | zhou    |        3 |
+|               3 |   5 | chon    |        2 |
+|               4 |   6 | cheny   |        4 |
++-----------------+-----+---------+----------+
+
