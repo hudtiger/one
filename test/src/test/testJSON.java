@@ -8,6 +8,7 @@ import com.alibaba.fastjson.serializer.PropertyFilter;
 
 import test.model.UserInfo;
 import test.model.UserVO;
+import utils.JSONUtil;
 
 public class testJSON {
 	static List<UserInfo> models;

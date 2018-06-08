@@ -433,7 +433,7 @@ curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: appli
     "multi_match": {
       "query":                "jump wolf",
       "type":                 "best_fields",    
-      "fields":               [ "tablename", "colname" ],
+      "fields":               [ "tablename", "colname^2" ], //可提升优先级
       "tie_breaker":          0.3,
       "minimum_should_match": "30%" 
     }
@@ -443,7 +443,7 @@ curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: appli
             "terms" : {
                 "field": "datatype.keyword", 
                 "order": {
-                  "_term": "desc"
+                  "_term": "desc"  //字典排序
                 }
             },"aggs": {
             "positon_sum":{
@@ -453,6 +453,86 @@ curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: appli
             },
             "detail": {
               "top_hits": {
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'
+
+
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 1, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "bool": {
+      "should": [
+        {"match_phrase_prefix": { "datatype": "var"}},
+        {"match": { "datatype": "int datetime"}}
+      ]
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": {
+                  "_count": "desc"  //统计数量排序
+                }, 
+                "size": "250"
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "_source": {
+                  "includes": [ "tablename","position", "datatype" ]
+                },
+                "size": 1
+              }
+            }
+          }
+        }
+    }
+}'
+
+curl -XGET "http://192.168.56.102:32666/test/db/_search" -H 'Content-Type: application/json' -d'
+{
+  "size": 1, 
+  "_source": ["tablename","colname","position","datatype"], 
+  "query": {
+    "bool": {
+      "should": [
+        {"match_phrase_prefix": { "datatype": "var"}},
+         {"match": { "datatype": "int datetime json"}}
+      ]
+    }
+  },
+   "aggs" : {
+        "grp_datatype" : {
+            "terms" : {
+                "field": "datatype.keyword", 
+                "order": [
+                  {"positon_sum":"asc"},   //自定义聚合统计排序
+                  {"_count": "desc"}
+                ], 
+                "size": "250"
+            },"aggs": {
+            "positon_sum":{
+              "sum": {
+                "field": "position"
+              }
+            },
+            "detail": {
+              "top_hits": {
+                "_source": {
+                  "includes": [ "tablename","position", "datatype" ]
+                },
                 "size": 1
               }
             }
