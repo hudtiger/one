@@ -27,6 +27,8 @@ public class CoffeeController {
     @GetMapping("/user")
     public User user() {
     	User u = new User();
+    	u.setId(12312);
+    	u.setName("micheal");
     	u.setContent("sdflsdf");
     	return u;
      //  return "Hello";

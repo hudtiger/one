@@ -25,7 +25,7 @@ public class UserInfoService {
 		return userMapper.getUserById(id);
 	}
 
-	@CacheEvict(value = "gls",keyGenerator="wiselyKeyGenerator",allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = "gls",allEntries=true,beforeInvocation=true)
 	public List<User> getUserList() {
 		return userMapper.getUserList();
 	}

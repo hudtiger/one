@@ -19,9 +19,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.MethodInvocationInfo;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.PropertyFilter;
+import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.gls.demo.entity.User;
 
 @Configuration
 public class WrapperResponseConvert {
@@ -53,7 +56,17 @@ public class WrapperResponseConvert {
 	       fastJsonHttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
 		FastJsonConfig fastJsonConfig = new FastJsonConfig();
 		fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-		
+		 Map<Class<?>, SerializeFilter> filters = new  HashMap<Class<?>, SerializeFilter>();
+		 filters.put(User.class, new PropertyFilter() {
+
+			@Override
+			public boolean apply(Object object, String name, Object value) {
+				if(name=="name")
+					return false;
+				else
+					return true;
+			}});
+		fastJsonConfig.setClassSerializeFilters(filters);
 		fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
 
 		HttpMessageConverter<?> converter = fastJsonHttpMessageConverter;
