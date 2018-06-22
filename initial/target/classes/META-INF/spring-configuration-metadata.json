@@ -1,0 +1,12 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "gls.configuration.MySqlConfiguration",
+      "name": "spring.datasource.gls",
+      "sourceMethod": "public javax.sql.DataSource glsDataSource() ",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}

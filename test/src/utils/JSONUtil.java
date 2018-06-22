@@ -11,7 +11,7 @@ import com.alibaba.fastjson.serializer.PropertyFilter;
 import filters.UPropertyFilter;
 
 public class JSONUtil {
-	public static <T> T getParamFilter(Method method) {
+	public static <T extends Annotation> T getParamFilter(Method method,Class<T> annotationClass) {
 		T filter = null;
 		Annotation[][] objAn = method.getParameterAnnotations();// .getAnnotation(UPropertyFilter.class);
 		for (int i = 0; i < objAn.length; i++) {
@@ -28,7 +28,7 @@ public class JSONUtil {
 
 	public static void parseClass(Class<?> clazz, Object vo) {
 		try {
-			UPropertyFilter filter = getParamFilter(clazz.getDeclaredMethod("exampleVO", Object.class));
+			UPropertyFilter filter = getParamFilter(clazz.getDeclaredMethod("exampleVO", Object.class),UPropertyFilter.class);
 			if(filter==null)
 				return;
 			PropertyFilter profilter = new PropertyFilter() {

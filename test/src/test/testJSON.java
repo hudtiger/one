@@ -14,7 +14,7 @@ public class testJSON {
 	static List<UserInfo> models;
 	static {
 		if (models == null) {
-			models = new ArrayList<>();
+			models = new ArrayList<UserInfo>();
 			for (int i = 0; i < 11; i++) {
 				models.add(new UserInfo(i, i, "chen"));
 			}

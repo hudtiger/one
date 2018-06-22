@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -15,6 +16,11 @@ public class UThread {
 		FutureTask task = new FutureTask<>(caller);
 		new Thread(task).run();
 		return task;
+	}
+	
+	public static  void RunASync(Callable caller,IThreadCallback callback) throws InterruptedException, ExecutionException, TimeoutException{
+		if(callback!=null)
+			callback.Done(Arrays.asList(RunASync(caller)));
 	}
 	
 	public static  void RunMultiASync(List<Callable> callers,IThreadCallback callback){
