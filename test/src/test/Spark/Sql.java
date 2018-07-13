@@ -34,6 +34,7 @@ public class Sql {
 		    sql.spark = SparkSession.builder().appName("Java Spark SQL data sources example")
 					.config("spark.some.config.option", "some-value").config("spark.sql.warehouse.dir", DATAPATH) // 配置文件保存位置
 					.master("local").getOrCreate();
+		    sql.spark.sparkContext().setLogLevel("WARN"); // 配置日志显示级别 ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
 		    sql.sqlContext = sql.spark.sqlContext();
 		    sql.register("grpConcat", new GroupConcat());//注册自定义函数
 		}
