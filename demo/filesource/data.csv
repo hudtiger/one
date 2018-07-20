@@ -1,0 +1,258 @@
+TableName,TableType,DataLength,MaxDataLength,IndexLength,Free,CreateDate
+CHARACTER_SETS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+COLLATIONS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+COLLATION_CHARACTER_SET_APPLICABILITY,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+COLUMNS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+COLUMN_PRIVILEGES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+COLUMN_STATISTICS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+ENGINES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+EVENTS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+FILES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_BUFFER_PAGE,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_BUFFER_PAGE_LRU,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_BUFFER_POOL_STATS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CACHED_INDEXES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMP,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMPMEM,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMPMEM_RESET,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMP_PER_INDEX,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMP_PER_INDEX_RESET,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_CMP_RESET,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_COLUMNS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_DATAFILES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FIELDS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FOREIGN,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FOREIGN_COLS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_BEING_DELETED,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_CONFIG,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_DEFAULT_STOPWORD,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_DELETED,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_INDEX_CACHE,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_FT_INDEX_TABLE,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_INDEXES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_METRICS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TABLES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TABLESPACES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TABLESPACES_BRIEF,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TABLESTATS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TEMP_TABLE_INFO,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_TRX,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+INNODB_VIRTUAL,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+KEY_COLUMN_USAGE,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+OPTIMIZER_TRACE,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+PARAMETERS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+PARTITIONS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+PLUGINS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+PROCESSLIST,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+PROFILING,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+REFERENTIAL_CONSTRAINTS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+RESOURCE_GROUPS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+ROUTINES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+SCHEMATA,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+SCHEMA_PRIVILEGES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+STATISTICS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+ST_GEOMETRY_COLUMNS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+ST_SPATIAL_REFERENCE_SYSTEMS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+TABLES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+TABLESPACES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+TABLE_CONSTRAINTS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+TABLE_PRIVILEGES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+TRIGGERS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+USER_PRIVILEGES,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+VIEWS,SYSTEM VIEW,0,0,0,0,2018/5/25 15:45
+columns_priv,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+component,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+db,BASE TABLE,16384,0,16384,4194304,2018/5/25 15:48
+default_roles,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+engine_cost,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+func,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+general_log,BASE TABLE,0,0,0,0,2018/5/25 15:48
+global_grants,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+gtid_executed,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+help_category,BASE TABLE,16384,0,16384,4194304,2018/5/25 15:48
+help_keyword,BASE TABLE,81920,0,81920,4194304,2018/5/25 15:48
+help_relation,BASE TABLE,65536,0,0,4194304,2018/5/25 15:48
+help_topic,BASE TABLE,1589248,0,65536,4194304,2018/5/25 15:48
+innodb_ddl_log,BASE TABLE,16384,0,16384,4194304,2018/5/25 7:45
+innodb_dynamic_metadata,BASE TABLE,16384,0,0,4194304,2018/5/25 7:45
+innodb_index_stats,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+innodb_table_stats,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+ndb_binlog_index,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+password_history,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+plugin,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+procs_priv,BASE TABLE,16384,0,16384,4194304,2018/5/25 15:48
+proxies_priv,BASE TABLE,16384,0,16384,4194304,2018/5/25 15:48
+role_edges,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+server_cost,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+servers,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+slave_master_info,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+slave_relay_log_info,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+slave_worker_info,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+slow_log,BASE TABLE,0,0,0,0,2018/5/25 15:48
+tables_priv,BASE TABLE,16384,0,16384,4194304,2018/5/25 15:48
+time_zone,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+time_zone_leap_second,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+time_zone_name,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+time_zone_transition,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+time_zone_transition_type,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+user,BASE TABLE,16384,0,0,4194304,2018/5/25 15:48
+accounts,BASE TABLE,0,0,0,0,2018/5/25 15:45
+cond_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+data_lock_waits,BASE TABLE,0,0,0,0,2018/5/25 15:45
+data_locks,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_errors_summary_by_account_by_error,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_errors_summary_by_host_by_error,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_errors_summary_by_thread_by_error,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_errors_summary_by_user_by_error,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_errors_summary_global_by_error,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_current,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_history,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_history_long,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_summary_by_account_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_summary_by_host_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_summary_by_thread_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_summary_by_user_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_stages_summary_global_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_current,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_histogram_by_digest,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_histogram_global,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_history,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_history_long,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_account_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_digest,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_host_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_program,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_thread_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_by_user_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_statements_summary_global_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_current,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_history,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_history_long,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_summary_by_account_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_summary_by_host_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_summary_by_thread_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_summary_by_user_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_transactions_summary_global_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_current,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_history,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_history_long,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_by_account_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_by_host_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_by_instance,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_by_thread_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_by_user_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+events_waits_summary_global_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+file_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+file_summary_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+file_summary_by_instance,BASE TABLE,0,0,0,0,2018/5/25 15:45
+global_status,BASE TABLE,0,0,0,0,2018/5/25 15:45
+global_variables,BASE TABLE,0,0,0,0,2018/5/25 15:45
+host_cache,BASE TABLE,0,0,0,0,2018/5/25 15:45
+hosts,BASE TABLE,0,0,0,0,2018/5/25 15:45
+memory_summary_by_account_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+memory_summary_by_host_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+memory_summary_by_thread_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+memory_summary_by_user_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+memory_summary_global_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+metadata_locks,BASE TABLE,0,0,0,0,2018/5/25 15:45
+mutex_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+objects_summary_global_by_type,BASE TABLE,0,0,0,0,2018/5/25 15:45
+performance_timers,BASE TABLE,0,0,0,0,2018/5/25 15:45
+persisted_variables,BASE TABLE,0,0,0,0,2018/5/25 15:45
+prepared_statements_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_configuration,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_filters,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_global_filters,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_status,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_status_by_coordinator,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_applier_status_by_worker,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_connection_configuration,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_connection_status,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_group_member_stats,BASE TABLE,0,0,0,0,2018/5/25 15:45
+replication_group_members,BASE TABLE,0,0,0,0,2018/5/25 15:45
+rwlock_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+session_account_connect_attrs,BASE TABLE,0,0,0,0,2018/5/25 15:45
+session_connect_attrs,BASE TABLE,0,0,0,0,2018/5/25 15:45
+session_status,BASE TABLE,0,0,0,0,2018/5/25 15:45
+session_variables,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_actors,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_consumers,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_instruments,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_objects,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_threads,BASE TABLE,0,0,0,0,2018/5/25 15:45
+setup_timers,BASE TABLE,0,0,0,0,2018/5/25 15:45
+socket_instances,BASE TABLE,0,0,0,0,2018/5/25 15:45
+socket_summary_by_event_name,BASE TABLE,0,0,0,0,2018/5/25 15:45
+socket_summary_by_instance,BASE TABLE,0,0,0,0,2018/5/25 15:45
+status_by_account,BASE TABLE,0,0,0,0,2018/5/25 15:45
+status_by_host,BASE TABLE,0,0,0,0,2018/5/25 15:45
+status_by_thread,BASE TABLE,0,0,0,0,2018/5/25 15:45
+status_by_user,BASE TABLE,0,0,0,0,2018/5/25 15:45
+table_handles,BASE TABLE,0,0,0,0,2018/5/25 15:45
+table_io_waits_summary_by_index_usage,BASE TABLE,0,0,0,0,2018/5/25 15:45
+table_io_waits_summary_by_table,BASE TABLE,0,0,0,0,2018/5/25 15:45
+table_lock_waits_summary_by_table,BASE TABLE,0,0,0,0,2018/5/25 15:45
+threads,BASE TABLE,0,0,0,0,2018/5/25 15:45
+user_defined_functions,BASE TABLE,0,0,0,0,2018/5/25 15:45
+user_variables_by_thread,BASE TABLE,0,0,0,0,2018/5/25 15:45
+users,BASE TABLE,0,0,0,0,2018/5/25 15:45
+variables_by_thread,BASE TABLE,0,0,0,0,2018/5/25 15:45
+variables_info,BASE TABLE,0,0,0,0,2018/5/25 15:45
+host_summary,VIEW,0,0,0,0,2018/5/25 15:45
+host_summary_by_file_io,VIEW,0,0,0,0,2018/5/25 15:45
+host_summary_by_file_io_type,VIEW,0,0,0,0,2018/5/25 15:45
+host_summary_by_stages,VIEW,0,0,0,0,2018/5/25 15:45
+host_summary_by_statement_latency,VIEW,0,0,0,0,2018/5/25 15:45
+host_summary_by_statement_type,VIEW,0,0,0,0,2018/5/25 15:45
+innodb_buffer_stats_by_schema,VIEW,0,0,0,0,2018/5/25 15:45
+innodb_buffer_stats_by_table,VIEW,0,0,0,0,2018/5/25 15:45
+innodb_lock_waits,VIEW,0,0,0,0,2018/5/25 15:45
+io_by_thread_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+io_global_by_file_by_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+io_global_by_file_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+io_global_by_wait_by_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+io_global_by_wait_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+latest_file_io,VIEW,0,0,0,0,2018/5/25 15:45
+memory_by_host_by_current_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+memory_by_thread_by_current_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+memory_by_user_by_current_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+memory_global_by_current_bytes,VIEW,0,0,0,0,2018/5/25 15:45
+memory_global_total,VIEW,0,0,0,0,2018/5/25 15:45
+metrics,VIEW,0,0,0,0,2018/5/25 15:45
+processlist,VIEW,0,0,0,0,2018/5/25 15:45
+ps_check_lost_instrumentation,VIEW,0,0,0,0,2018/5/25 15:45
+schema_auto_increment_columns,VIEW,0,0,0,0,2018/5/25 15:45
+schema_index_statistics,VIEW,0,0,0,0,2018/5/25 15:45
+schema_object_overview,VIEW,0,0,0,0,2018/5/25 15:45
+schema_redundant_indexes,VIEW,0,0,0,0,2018/5/25 15:45
+schema_table_lock_waits,VIEW,0,0,0,0,2018/5/25 15:45
+schema_table_statistics,VIEW,0,0,0,0,2018/5/25 15:45
+schema_table_statistics_with_buffer,VIEW,0,0,0,0,2018/5/25 15:45
+schema_tables_with_full_table_scans,VIEW,0,0,0,0,2018/5/25 15:45
+schema_unused_indexes,VIEW,0,0,0,0,2018/5/25 15:45
+session,VIEW,0,0,0,0,2018/5/25 15:45
+session_ssl_status,VIEW,0,0,0,0,2018/5/25 15:45
+statement_analysis,VIEW,0,0,0,0,2018/5/25 15:45
+statements_with_errors_or_warnings,VIEW,0,0,0,0,2018/5/25 15:45
+statements_with_full_table_scans,VIEW,0,0,0,0,2018/5/25 15:45
+statements_with_runtimes_in_95th_percentile,VIEW,0,0,0,0,2018/5/25 15:45
+statements_with_sorting,VIEW,0,0,0,0,2018/5/25 15:45
+statements_with_temp_tables,VIEW,0,0,0,0,2018/5/25 15:45
+sys_config,BASE TABLE,16384,0,0,0,2018/5/25 15:45
+user_summary,VIEW,0,0,0,0,2018/5/25 15:45
+user_summary_by_file_io,VIEW,0,0,0,0,2018/5/25 15:45
+user_summary_by_file_io_type,VIEW,0,0,0,0,2018/5/25 15:45
+user_summary_by_stages,VIEW,0,0,0,0,2018/5/25 15:45
+user_summary_by_statement_latency,VIEW,0,0,0,0,2018/5/25 15:45
+user_summary_by_statement_type,VIEW,0,0,0,0,2018/5/25 15:45
+version,VIEW,0,0,0,0,2018/5/25 15:45
+wait_classes_global_by_avg_latency,VIEW,0,0,0,0,2018/5/25 15:45
+wait_classes_global_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+waits_by_host_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+waits_by_user_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+waits_global_by_latency,VIEW,0,0,0,0,2018/5/25 15:45
+CTE,BASE TABLE,16384,0,0,0,2018/5/25 16:55
+PTable0,BASE TABLE,13524,2.81475E+14,47104,0,2018/5/25 15:56
+hibernate_sequence,BASE TABLE,9,2.53327E+15,1024,0,2018/5/25 15:45
+user,BASE TABLE,588,2.81475E+14,2048,0,2018/5/25 15:45
+users,BASE TABLE,16384,0,0,0,2018/5/25 15:45

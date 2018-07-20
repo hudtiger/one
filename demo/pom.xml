@@ -9,13 +9,65 @@
 	<inceptionYear>2015</inceptionYear>
 
 	<properties>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<flink.version>1.5.1</flink.version>
+		<flink.scala.version>2.11</flink.scala.version>
+		<java.version>1.8</java.version>
 		<encoding>UTF-8</encoding>
 		<scala.version>2.11.0</scala.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 
 	<dependencies>
+		<!-- Apache flink -->
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-java</artifactId>
+			<version>${flink.version}</version>
+			<scope>provided</scope>
+		</dependency>
+ 		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-java_${flink.scala.version}</artifactId>
+			<version>${flink.version}</version>
+			<scope>provided</scope>
+		</dependency>
+ 		<dependency>
+	        <groupId>org.apache.flink</groupId>
+	        <artifactId>flink-jdbc</artifactId>
+	        <version>${flink.version}</version>
+	    </dependency>
+	    <dependency><!-- Flink SQL -->
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-scala_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-scala_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+		</dependency>
+<!-- 	    <dependency>
+	        <groupId>org.apache.flink</groupId>
+	        <artifactId>flink-queryable-state-client-java_${flink.scala.version}</artifactId>
+	        <version>${flink.version}</version>
+	    </dependency> -->
+
+		<!-- Add connector dependencies here. They must be in the default scope (compile). -->
+		<!-- Example:
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-connector-kafka-0.10_${scala.binary.version}</artifactId>
+			<version>${flink.version}</version>
+		</dependency>
+		-->
+		<!-- scala -->
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-compiler</artifactId>
@@ -25,6 +77,27 @@
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>${scala.version}</version>
+		</dependency>
+		
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+		
+		<!-- log4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

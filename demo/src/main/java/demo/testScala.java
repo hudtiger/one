@@ -20,9 +20,6 @@ public class testScala {
 		Seq<String> datas =ConverterUtil.toSeq(Arrays.asList("Runoob", "Baidu", "Google"));
 		Responstory.say(datas);
 		
-		Responstory.say(datas.iterator());
-		
-		
 		System.out.println(Responstory.sayCallback().apply(datas.toList()));
 		
 		System.out.println(Responstory.say(datas.toList(),Responstory.sayCallback()));
