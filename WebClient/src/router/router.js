@@ -46,6 +46,7 @@ const questionDetail = r => require.ensure([], () => r(require('../page/service/
 const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 const chart = r=>require.ensure([], () => r(require('../page/chart/demo')), 'demo')/* echart demo */
+const flow = r=>require.ensure([], () => r(require('../page/chart/flow')), 'flow')/* flow demo */
 
 
 
@@ -59,10 +60,15 @@ export default [{
             path: '',
             redirect: '/home'
         },
-         //echart demo
-         {
+        //echart demo
+        {
             path: '/chart',
             component: chart
+        },
+        //flow demo
+        {
+            path: '/flow',
+            component: flow
         },
         //首页城市列表页
         {
