@@ -28,6 +28,7 @@
 
 	<!-- 依赖包 -->
 	<dependencies>
+	
 		<dependency>
 			<groupId>test</groupId>
 			<artifactId>test.AutoCreate</artifactId>
@@ -41,6 +42,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.allclient -->
+		<dependency>
+		    <groupId>com.ibm.mq</groupId>
+		    <artifactId>com.ibm.mq.allclient</artifactId>
+		    <version>9.0.4.0</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
