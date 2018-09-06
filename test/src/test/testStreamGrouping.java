@@ -20,6 +20,8 @@ public class testStreamGrouping {
 		
 		Map<String, List<ExtendClass>> obj = list.stream().collect(Collectors.groupingBy(ExtendClass::getCaption, Collectors.toList()));
 		
+		System.out.println(JSONObject.toJSONString(obj));
+		
 		Map<String, Map<String,List<ExtendClass>>> obj1 = list.stream().collect(
 				Collectors.groupingBy(ExtendClass::getCaption, 
 						Collectors.groupingBy(ExtendClass::getSubject,Collectors.toList())));
